@@ -37,11 +37,25 @@ public class SkylineManager : MonoBehaviour {
 		}
 
 		}
+	        public Vector3 minSize, maxSize;
 
 	        private void Recycle () {
-			Transform o = objectQueue.Dequeue();
-			o.localPosition = nextPosition;
-			nextPosition.x += o.localScale.x;
+
+		    Vector3 scale = new Vector3(
+			Random.Range(minSize.x, maxSize.x),
+			Random.Range(minSize.y, maxSize.y),
+			Random.Range(minSize.z, maxSize.z));
+
+		    Vector3 position = nextPosition;
+		    position.x += scale.x * 0.5f;
+		    position.y += scale.y * 0.5f;
+
+		
+		Transform o = objectQueue.Dequeue();
+
+		o.localScale = scale;
+		o.localPosition = position;
+			nextPosition.x += scale.x;
 			objectQueue.Enqueue(o);
 		}
 
