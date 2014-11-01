@@ -11,8 +11,15 @@
  void Start () {
 
 	GameEventManager.GameStart += GameStart;
+	GameEventManager.GameOver += GameOver;
 	gameOverText.enabled = false;
 }
+
+	private void GameOver () {
+		gameOverText.enabled = true;
+		instructionsText.enabled = true;
+		enabled = true;
+	}
 
 void Update () {
 	if(Input.GetButtonDown("Jump")){

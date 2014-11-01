@@ -12,6 +12,8 @@ public class Runner : MonoBehaviour {
 
 	public Vector3 jumpVelocity;
 
+	public float gameOverY;
+
 	void Update () {
 
 		if(touchingPlatform && Input.GetButtonDown("Jump")){
@@ -21,6 +23,9 @@ public class Runner : MonoBehaviour {
 		}
 	
 		distanceTraveled = transform.localPosition.x;
+		if(transform.localPosition.y < gameOverY){
+			GameEventManager.TriggerGameOver();
+		}
 	}
 
 	void FixedUpdate () {
