@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class SkylineManager : MonoBehaviour {
+public class PlatformManager : MonoBehaviour {
 	
 	public Transform prefab;
 	public int numberOfObjects;
