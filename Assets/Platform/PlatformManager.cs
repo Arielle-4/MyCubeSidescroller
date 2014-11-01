@@ -40,6 +40,9 @@ public class PlatformManager : MonoBehaviour {
 		
 	}
 
+	public Material[] materials;
+	public PhysicMaterial[] physicMaterials;
+
 	
 	private void Recycle () {
 		
@@ -57,7 +60,10 @@ public class PlatformManager : MonoBehaviour {
 		
 		o.localScale = scale;
 		o.localPosition = position;
-		nextPosition.x += scale.x;
+
+		int materialIndex = Random.Range(0, materials.Length);
+		o.renderer.material = materials[materialIndex];
+		o.collider.material = physicMaterials[materialIndex];
 		objectQueue.Enqueue(o);
 
 		nextPosition += new Vector3(
