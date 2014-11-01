@@ -5,15 +5,37 @@ public class Runner : MonoBehaviour {
 
 	public static float distanceTraveled;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
+	public float acceleration;
+
+	private bool touchingPlatform;
+
+
+	public Vector3 jumpVelocity;
+
 	void Update () {
+
+		if(touchingPlatform && Input.GetButtonDown("Jump")){
+			rigidbody.AddForce(jumpVelocity, ForceMode.VelocityChange);
+
+			touchingPlatform = false;
+		}
 	
-		transform.Translate(5f * Time.deltaTime, 0f, 0f);
 		distanceTraveled = transform.localPosition.x;
 	}
+
+	void FixedUpdate () {
+		if(touchingPlatform){
+			rigidbody.AddForce(acceleration, 0f, 0f, ForceMode.Acceleration);
+		}
+	}
+	
+	void OnCollisionEnter () {
+		touchingPlatform = true;
+	}
+	
+	void OnCollisionExit () {
+		touchingPlatform = false;
+	}
+
+
 }
