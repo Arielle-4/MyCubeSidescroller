@@ -15,18 +15,27 @@ public class PlatformManager : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		
+
+		GameEventManager.GameStart += GameStart;
+		GameEventManager.GameOver += GameOver;
 		objectQueue = new Queue<Transform>(numberOfObjects);
 		for (int i = 0; i < numberOfObjects; i++) {
-			objectQueue.Enqueue((Transform)Instantiate(prefab));
+			objectQueue.Enqueue((Transform)Instantiate(
+				prefab, new Vector3(0f, 0f, -100f), Quaternion.identity));
 		}
+		enabled = false;
+	}
 		
-		
+	private void GameStart () {
 		nextPosition = startPosition;
 		for (int i= 0;i<numberOfObjects;i++){
 			Recycle();
 		}
-		
+		enabled = true;
+	}
+
+	private void GameOver () {
+		enabled = false;
 	}
 	
 	
