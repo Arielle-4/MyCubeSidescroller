@@ -30,7 +30,9 @@ public class Runner : MonoBehaviour {
 
 	private void GameStart () {
 		boosts = 0;
+		GUIManager.SetBoosts(boosts);
 		distanceTraveled = 0f;
+		GUIManager.SetDistance(distanceTraveled);
 		transform.localPosition = startPosition;
 		renderer.enabled = true;
 		rigidbody.isKinematic = false;
@@ -39,6 +41,7 @@ public class Runner : MonoBehaviour {
 
 	public static void AddBoost () {
 		boosts += 1;
+		GUIManager.SetBoosts(boosts);
 	}
 	
 	private void GameOver () {
@@ -61,11 +64,13 @@ public class Runner : MonoBehaviour {
 			else if(boosts > 0){
 				rigidbody.AddForce(boostVelocity, ForceMode.VelocityChange);
 				boosts -= 1;
+				GUIManager.SetBoosts(boosts);
 			}
 		}
 
 	
 		distanceTraveled = transform.localPosition.x;
+		GUIManager.SetBoosts(boosts);
 
 		if(transform.localPosition.y < gameOverY){
 			GameEventManager.TriggerGameOver();

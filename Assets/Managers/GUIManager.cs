@@ -5,15 +5,24 @@
 
 	public class GUIManager : MonoBehaviour {
 		
-		public GUIText gameOverText, instructionsText, runnerText;
+	public GUIText  boostsText, distanceText, gameOverText, instructionsText, runnerText;
 
-
+	private static GUIManager instance;
  void Start () {
 
+		instance = this;
 	GameEventManager.GameStart += GameStart;
 	GameEventManager.GameOver += GameOver;
 	gameOverText.enabled = false;
 }
+
+	public static void SetBoosts(int boosts){
+		instance.boostsText.text = boosts.ToString();
+	}
+	
+	public static void SetDistance(float distance){
+		instance.distanceText.text = distance.ToString("f0");
+	}
 
 	private void GameOver () {
 		gameOverText.enabled = true;
